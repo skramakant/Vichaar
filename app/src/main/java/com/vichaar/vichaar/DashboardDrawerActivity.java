@@ -66,7 +66,9 @@ public class DashboardDrawerActivity extends AppCompatActivity
         layout.setOrientation(LinearLayoutManager.VERTICAL);
         topIdeasList.setLayoutManager(layout);
 
-        topIdeasAdapter = new TopIdeasAdapter(this);
+
+        //cursor code here
+        topIdeasAdapter = new TopIdeasAdapter(this,null);
         topIdeasList.setAdapter(topIdeasAdapter);
 
 
@@ -110,21 +112,22 @@ public class DashboardDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.all_ideas) {
             // Handle the camera action
             Log.v(TAG,"All Ideas click");
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.top_voted) {
             Log.v(TAG,"Top Voted click");
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.new_ideas) {
             Log.v(TAG,"Newbies click");
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.leader_board) {
             Log.v(TAG,"LeaderBoard click");
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.processed_ideas) {
             Log.v(TAG,"Processed click");
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.funded_ideas) {
             Log.v(TAG,"Funded click");
         }else if(id == R.id.add_idea){
             Log.v(TAG,"Add idea");
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

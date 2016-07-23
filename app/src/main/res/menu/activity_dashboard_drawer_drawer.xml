@@ -3,19 +3,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/all_ideas"
             android:icon="@drawable/ic_menu_camera"
             android:title="All Ideas" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/top_voted"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Top Voted" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/new_ideas"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Newbies" />
+            android:title="New Ideas" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/leader_board"
             android:icon="@drawable/ic_menu_manage"
             android:title="LeaderBoard" />
     </group>
@@ -23,11 +23,11 @@
     <item android:title="Selected Ideas">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/processed_ideas"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Processed Ideas" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/funded_ideas"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Funded Ideas" />
         </menu>

@@ -68,6 +68,7 @@
                     android:layout_weight="50"
                     android:gravity="center"
                     android:text="Participants"
+                    android:textColor="@color/text_view_color"
                     android:textSize="25dp"/>
 
                 <TextView
@@ -76,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:text="800"
+                    android:textColor="@color/text_view_color"
                     android:textSize="25dp"
                     android:gravity="center"/>
             </LinearLayout>
@@ -97,6 +99,7 @@
                     android:layout_weight="50"
                     android:gravity="center"
                     android:text="Ideas"
+                    android:textColor="@color/text_view_color"
                     android:textSize="25dp"
                     />
                 <TextView
@@ -104,6 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
+                    android:textColor="@color/text_view_color"
                     android:text="500"
                     android:textSize="25dp"
                     android:gravity="center"/>
@@ -127,9 +131,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Top ideas"
+                android:text="Top Ideas"
                 android:textSize="35dp"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="@color/text_view_color"
                 android:padding="5dp"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/top_ideas_list"
