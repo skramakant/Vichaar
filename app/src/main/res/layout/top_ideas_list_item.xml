@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recycle idea dis"
+                android:textSize="25dp"
+                android:maxLines="2"
+                android:padding="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="ramakant singh"
+                    android:textSize="15dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:padding="5dp"/>
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="clean india"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:padding="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/abc_cab_background_top_material">
+                    <TextView
+                        android:id="@+id/tvVote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vote"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                    <TextView
+                        android:id="@+id/tvVoteCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/abc_cab_background_top_material"
+                    android:layout_marginLeft="3dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="comment"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/abc_cab_background_top_material"
+                    android:layout_marginLeft="3dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="views"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textSize="15dp"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/holo_red_light"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+</android.support.v7.widget.CardView>
