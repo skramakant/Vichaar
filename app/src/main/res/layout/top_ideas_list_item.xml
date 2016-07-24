@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
+    android:id="@+id/cv_idea_card_item"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:padding="5dp">
 
         <LinearLayout
+            android:id="@+id/ll_idea_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/idea_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recycle idea dis"
@@ -23,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/person_name"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="ramakant singh"
@@ -32,6 +36,7 @@
                     android:textColor="@color/text_view_color"
                     android:padding="5dp"/>
                 <TextView
+                    android:id="@+id/category"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="clean india"
@@ -54,7 +59,7 @@
                         android:id="@+id/tvVote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="vote"
+                        android:text="UpVote"
                         android:textSize="15dp"
                         android:padding="4dp"
                         android:gravity="center"
@@ -79,12 +84,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="comment"
+                        android:text="DownVote"
                         android:textSize="15dp"
                         android:padding="4dp"
                         android:gravity="center"
                         android:textColor="@color/app_background_color"/>
                     <TextView
+                        android:id="@+id/tvCommentCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"
@@ -109,6 +115,7 @@
                         android:gravity="center"
                         android:textColor="@color/app_background_color"/>
                     <TextView
+                        android:id="@+id/tvViewCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"

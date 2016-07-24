@@ -1,5 +1,7 @@
 package com.vichaar.vichaar;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,16 +20,25 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import Adapters.TopIdeasAdapter;
+import Database.DatabaseOpenHelper;
+import Interfaces.InterfaceOnItemClickHandler;
+import Interfaces.InterfaceRefreshDashboard;
+import Models.IdeaDetailsModel;
 
 public class DashboardDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, InterfaceOnItemClickHandler{
 
     public static String TAG = DashboardDrawerActivity.class.getSimpleName();
     private RecyclerView topIdeasList;
     private TextView participateCount;
     private TextView ideasCount;
     private TopIdeasAdapter topIdeasAdapter;
+
+    private int ADD_IDEA_REQUEST_CODE = 100;
+    private int IDEA_DETAILS_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,8 @@ public class DashboardDrawerActivity extends AppCompatActivity
 
 
         //cursor code here
-        topIdeasAdapter = new TopIdeasAdapter(this,null);
+        Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+        topIdeasAdapter = new TopIdeasAdapter(this,cursor);
         topIdeasList.setAdapter(topIdeasAdapter);
 
 
@@ -127,11 +139,30 @@ public class DashboardDrawerActivity extends AppCompatActivity
             Log.v(TAG,"Funded click");
         }else if(id == R.id.add_idea){
             Log.v(TAG,"Add idea");
-
+            Intent intent = new Intent(this,AddIdea.class);
+            startActivityForResult(intent,ADD_IDEA_REQUEST_CODE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == ADD_IDEA_REQUEST_CODE){
+                Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+                topIdeasAdapter.swapCursor(cursor);
+            }
+        }
+    }
+
+    @Override
+    public void itemClickHandler(IdeaDetailsModel ideaDetailsModel) {
+        Intent intent = new Intent(this,IdeaDetails.class);
+        intent.putExtra("ideaDetails", (Serializable) ideaDetailsModel);
+        startActivityForResult(intent,IDEA_DETAILS_REQUEST_CODE);
     }
 }

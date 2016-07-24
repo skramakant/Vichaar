@@ -14,11 +14,12 @@ public class IdeaDetailsModel {
     public String ideaCategory;
 
     public String ideaDescription;
-    public String ideaUpVote ;
-    public String ideaDownVote ;
-    public String ideaViewCount ;
-    public String ideaEntryDate ;
-    public String ideaLastModificationDate ;
+
+    public int ideaUpVote ;
+    public int ideaDownVote ;
+    public int ideaViewCount ;
+    public long ideaEntryDate ;
+    public long ideaLastModificationDate ;
 
     public String personName;
     public String personEmail ;
@@ -53,43 +54,43 @@ public class IdeaDetailsModel {
         this.ideaCategory = ideaCategory;
     }
 
-    public String getIdeaUpVote() {
+    public int getIdeaUpVote() {
         return ideaUpVote;
     }
 
-    public void setIdeaUpVote(String ideaUpVote) {
+    public void setIdeaUpVote(int ideaUpVote) {
         this.ideaUpVote = ideaUpVote;
     }
 
-    public String getIdeaDownVote() {
+    public int getIdeaDownVote() {
         return ideaDownVote;
     }
 
-    public void setIdeaDownVote(String ideaDownVote) {
+    public void setIdeaDownVote(int ideaDownVote) {
         this.ideaDownVote = ideaDownVote;
     }
 
-    public String getIdeaViewCount() {
+    public int getIdeaViewCount() {
         return ideaViewCount;
     }
 
-    public void setIdeaViewCount(String ideaViewCount) {
+    public void setIdeaViewCount(int ideaViewCount) {
         this.ideaViewCount = ideaViewCount;
     }
 
-    public String getIdeaEntryDate() {
+    public long getIdeaEntryDate() {
         return ideaEntryDate;
     }
 
-    public void setIdeaEntryDate(String ideaEntryDate) {
+    public void setIdeaEntryDate(long ideaEntryDate) {
         this.ideaEntryDate = ideaEntryDate;
     }
 
-    public String getIdeaLastModificationDate() {
+    public long getIdeaLastModificationDate() {
         return ideaLastModificationDate;
     }
 
-    public void setIdeaLastModificationDate(String ideaLastModificationDate) {
+    public void setIdeaLastModificationDate(long ideaLastModificationDate) {
         this.ideaLastModificationDate = ideaLastModificationDate;
     }
 
@@ -148,10 +149,11 @@ public class IdeaDetailsModel {
         data.setIdeaTitle(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_TITLE)));
         data.setIdeaCategory(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_CATEGORY)));
         data.setIdeaDescription(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_DESCRIPTION)));
-        data.setIdeaUpVote(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_UP_VOTE)));
-        data.setIdeaDownVote(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_DOWN_VOTE)));
-        data.setIdeaEntryDate(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_ENTRY_DATE)));
-        data.setIdeaLastModificationDate(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_LAST_MODIFICATION_DATE)));
+        data.setIdeaUpVote(cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_UP_VOTE)));
+        data.setIdeaDownVote(cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_DOWN_VOTE)));
+        data.setIdeaViewCount(cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_VIEW_COUNT)));
+        data.setIdeaEntryDate(cursor.getLong(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_ENTRY_DATE)));
+        data.setIdeaLastModificationDate(cursor.getLong(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_LAST_MODIFICATION_DATE)));
         data.setIdeaIsActive(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.IDEA_IS_ACTIVE)));
 
         data.setPersonName(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.PERSON_NAME)));

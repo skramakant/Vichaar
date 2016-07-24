@@ -24,11 +24,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static String IDEA_TITLE = "ideaTitle";
     public static String IDEA_CATEGORY = "ideaCategory";
     public static String IDEA_DESCRIPTION = "ideaDescription";
+
     public static String IDEA_UP_VOTE = "ideaUpVote";
     public static String IDEA_DOWN_VOTE = "ideaDownVote";
     public static String IDEA_VIEW_COUNT = "ideaViewCount";
     public static String IDEA_ENTRY_DATE = "ideaEntryDate";
     public static String IDEA_LAST_MODIFICATION_DATE = "ideaLastModificationDate";
+
     public static String IDEA_IS_ACTIVE = "ideaIsActive";
 
 
@@ -42,11 +44,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             IDEA_TITLE + " TEXT, "+
             IDEA_CATEGORY + " TEXT, "+
             IDEA_DESCRIPTION + " TEXT, "+
-            IDEA_UP_VOTE + " TEXT, "+
-            IDEA_DOWN_VOTE + " TEXT, "+
-            IDEA_VIEW_COUNT + " TEXT, "+
-            IDEA_ENTRY_DATE + " TEXT, "+
-            IDEA_LAST_MODIFICATION_DATE + " TEXT, "+
+            IDEA_UP_VOTE + " integer, "+
+            IDEA_DOWN_VOTE + " integer, "+
+            IDEA_VIEW_COUNT + " integer, "+
+            IDEA_ENTRY_DATE + " long, "+
+            IDEA_LAST_MODIFICATION_DATE + " long, "+
             PERSON_NAME + " TEXT, "+
             PERSON_EMAIL + " TEXT, "+
             PERSON_MOBILE + " TEXT, "+
@@ -79,8 +81,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public void insertIdea(String ideaTitle, String ideaCategory, String ideaDescription,
-                               String ideaUpVote, String ideaDownVote, String ideaViewCount,
-                               String ideaEntryDate,String ideaLastModificationDate,String personName,
+                               int ideaUpVote, int ideaDownVote, int ideaViewCount,
+                               long ideaEntryDate,long ideaLastModificationDate,String personName,
                                String personEmail,String personMobile,String personProfileImageUrl,
                                String ideaIsActive)
     {
