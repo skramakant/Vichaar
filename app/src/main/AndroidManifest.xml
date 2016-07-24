@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".AddIdea" />
         <activity android:name=".IdeaDetails" />
-        <activity android:name=".NewIdeas"></activity>
+        <activity android:name=".NewIdeas" />
+        <activity android:name=".LeaderBoard"></activity>
     </application>
 
 </manifest>

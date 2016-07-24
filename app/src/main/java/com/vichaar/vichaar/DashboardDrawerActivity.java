@@ -135,6 +135,8 @@ public class DashboardDrawerActivity extends AppCompatActivity
             startActivity(intent);
             Log.v(TAG,"Newbies click");
         } else if (id == R.id.leader_board) {
+            Intent intent = new Intent(this,LeaderBoard.class);
+            startActivity(intent);
             Log.v(TAG,"LeaderBoard click");
         } else if (id == R.id.processed_ideas) {
             Log.v(TAG,"Processed click");
