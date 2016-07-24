@@ -62,8 +62,6 @@ public class NewIdeas extends AppCompatActivity implements InterfaceOnItemClickH
             topIdeasList.setAdapter(topIdeasAdapter);
         }
 
-
-
     }
 
     @Override
@@ -79,11 +77,28 @@ public class NewIdeas extends AppCompatActivity implements InterfaceOnItemClickH
         if(key.equals("all_ideas")){
             getSupportActionBar().setTitle("All Ideas");
         }else if(key.equals("top_voted")){
-            getSupportActionBar().setTitle("Top Voted Ideas");
+            getSupportActionBar().setTitle("Top Voted");
         }else if(key.equals("new_ideas")){
             getSupportActionBar().setTitle("New Ideas");
+
         }
 
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(key.equals("all_ideas")){
+            Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+            topIdeasAdapter.swapCursor(cursor);
+        }else if(key.equals("top_voted")){
+            Cursor cursor = DatabaseOpenHelper.getInstance(this).getTopVotedIdeas();
+            topIdeasAdapter.swapCursor(cursor);
+        }else if(key.equals("new_ideas")){
+            Cursor cursor = DatabaseOpenHelper.getInstance(this).getNewIdeas();
+            topIdeasAdapter.swapCursor(cursor);
+        }
     }
 }

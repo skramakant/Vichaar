@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
 
                     android:gravity="center"
-                    android:text="Ideas"
+                    android:text="Total Ideas"
                     android:textColor="@color/text_view_color"
                     android:textSize="25dp"
                     />
@@ -106,7 +106,7 @@
                     android:id="@+id/ideas_count"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_view_color"
+                    android:textColor="@color/app_background_color"
                     android:text="0"
                     android:textSize="25dp"
                     android:gravity="center"/>

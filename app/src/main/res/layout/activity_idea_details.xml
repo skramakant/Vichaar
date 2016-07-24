@@ -24,25 +24,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/idea_details_title"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Title"
-                android:textSize="25dp"
-                android:gravity=""
-                android:padding="2dp"
-                android:textColor="@color/text_view_color"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:text="Idea Title : "
+                    android:textSize="25dp"
+                    android:gravity=""
+                    android:padding="2dp"
+                    android:textColor="@color/text_view_color"
+                    />
+                <TextView
+                    android:id="@+id/idea_details_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Title"
+                    android:textSize="25dp"
+                    android:gravity=""
+                    android:padding="2dp"
+                    android:textColor="@color/text_view_color"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="By:"
+                    android:textSize="25dp"
+                    android:gravity=""
+                    android:padding="2dp"
+                    android:textColor="@color/text_view_color"
+                    />
+                <TextView
                     android:id="@+id/idea_details_person"
                     android:layout_width="190dp"
-                    android:layout_height="50dp"
-                    android:text="persone"
+                    android:layout_height="40dp"
+                    android:text="person"
                     android:textSize="25dp"
                     android:gravity=""
                     android:padding="2dp"
@@ -50,7 +74,7 @@
                 <TextView
                     android:id="@+id/idea_details_category"
                     android:layout_width="190dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="category"
                     android:textSize="25dp"
                     android:gravity=""

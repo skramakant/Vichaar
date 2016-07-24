@@ -27,6 +27,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="5dp"
             android:text="person "
+            android:textColor="@color/text_view_color"
             android:textSize="30dp"/>
     </LinearLayout>
 
