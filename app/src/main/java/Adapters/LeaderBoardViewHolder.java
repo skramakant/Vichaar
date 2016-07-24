@@ -29,9 +29,10 @@ public class LeaderBoardViewHolder extends RecyclerView.ViewHolder {
 
     private TextView tv_rank;
     private TextView tv_person_name;
+
     public LeaderBoardViewHolder(View itemView) {
         super(itemView);
         tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
-        tv_person_name = (TextView) itemView.findViewById(R.id.person_name);
+        tv_person_name = (TextView) itemView.findViewById(R.id.tv_person_name);
     }
 }

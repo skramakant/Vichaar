@@ -16,15 +16,14 @@ import Database.DatabaseOpenHelper;
  */
 public class LeaderBoardAdapter extends CursorRecyclerViewAdapter<LeaderBoardViewHolder> {
 
-    private static int i = 1;
     public LeaderBoardAdapter(Context context, Cursor cursor) {
         super(context, cursor);
     }
 
     @Override
     public void onBindViewHolder(LeaderBoardViewHolder viewHolder, Cursor cursor) {
-        String rank = String.valueOf(i);
-        i++;
+        int i = cursor.getPosition();
+        String rank = String.valueOf(i+1);
         viewHolder.getTv_rank().setText(rank.toString());
         viewHolder.getTv_person_name().setText(cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.PERSON_NAME)));
 

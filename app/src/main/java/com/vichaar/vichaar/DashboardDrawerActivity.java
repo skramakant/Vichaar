@@ -19,7 +19,6 @@ import android.widget.TextView;
 import Adapters.TopIdeasAdapter;
 import Database.DatabaseOpenHelper;
 import Interfaces.InterfaceOnItemClickHandler;
-import Interfaces.InterfaceRefreshDashboard;
 import Models.IdeaDetailsModel;
 
 public class DashboardDrawerActivity extends AppCompatActivity
