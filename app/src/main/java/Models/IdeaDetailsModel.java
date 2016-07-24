@@ -2,12 +2,14 @@ package Models;
 
 import android.database.Cursor;
 
+import java.io.Serializable;
+
 import Database.DatabaseOpenHelper;
 
 /**
  * Created by ramakant on 23/7/16.
  */
-public class IdeaDetailsModel {
+public class IdeaDetailsModel implements Serializable {
 
     public int id;
     public String ideaTitle ;

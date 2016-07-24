@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.vichaar.vichaar.DashboardDrawerActivity;
+
+import Interfaces.InterfaceRefreshDashboard;
 import Models.IdeaDetailsModel;
 
 
@@ -17,9 +20,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public static String databaseName = "IdeaDatabase";
     public static DatabaseOpenHelper dbHelper;
+    private  InterfaceRefreshDashboard interfaceRefreshDashboard;
 
 
     public static String IDEA_TABLE = "ideaTable";
+    public static String COMMENT_TABLE = "commentTable";
 
     public static String IDEA_TITLE = "ideaTitle";
     public static String IDEA_CATEGORY = "ideaCategory";
@@ -39,6 +44,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static String PERSON_MOBILE = "personMobile";
     public static String PERSON_PROFILE_IMAGE_URL = "personProfileImageUrl";
 
+    public static String IDEA_ID_COMMENT = "ideaID";
+    public static String IDEA_COMMENT = "ideaComment";
+    public static String COMMENT_IS_ACTIVE = "isActive";
+
 
     String CreateDatabase = "CREATE TABLE IF NOT EXISTS "+IDEA_TABLE +" (_id integer primary key autoincrement, "+
             IDEA_TITLE + " TEXT, "+
@@ -55,13 +64,19 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             PERSON_PROFILE_IMAGE_URL + " TEXT, "+
             IDEA_IS_ACTIVE + " TEXT );";
 
+    String CreateCommentTable = "CREATE TABLE IF NOT EXISTS "+COMMENT_TABLE +" (_id integer primary key autoincrement, "+
+            IDEA_ID_COMMENT + " integer, "+
+            COMMENT_IS_ACTIVE + " TEXT, "+
+            IDEA_COMMENT + " TEXT );";
 
     public DatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        interfaceRefreshDashboard = (InterfaceRefreshDashboard) context;
     }
 
     public static DatabaseOpenHelper getInstance(Context context)
     {
+
         if(dbHelper == null)
         {
             dbHelper = new DatabaseOpenHelper(context,DatabaseOpenHelper.databaseName,null,1);
@@ -73,6 +88,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CreateDatabase);
+        db.execSQL(CreateCommentTable);
     }
 
     @Override
@@ -111,12 +127,97 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    public void insertComment(int ideaId,String commentText){
+        if(dbHelper!=null)
+        {
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(IDEA_ID_COMMENT, ideaId);
+            values.put(COMMENT_IS_ACTIVE,"true");
+            values.put(IDEA_COMMENT,commentText);
+            long rowInserted = db.insert(COMMENT_TABLE,null,values);
+            Log.e("Row inserted", rowInserted + "  ");
+        }
+    }
+
+    public void upVote(int current_count, int rowId){
+        if(dbHelper != null){
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            String query = "UPDATE "+ IDEA_TABLE + " SET "+  IDEA_UP_VOTE + " = " + current_count + " WHERE " + "_id" + " = " + rowId;
+            db.execSQL(query);
+        }
+    }
+
+    public void DownVote(int current_count, int rowId){
+        if(dbHelper != null){
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            String query = "UPDATE "+ IDEA_TABLE + " SET "+  IDEA_DOWN_VOTE + " = " + current_count + " WHERE " + "_id" + " = " + rowId;
+            db.execSQL(query);
+        }
+    }
+
+    public void Views(int current_count, int rowId){
+        if(dbHelper != null){
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            String query = "UPDATE "+ IDEA_TABLE + " SET "+  IDEA_VIEW_COUNT + " = " + current_count + " WHERE " + "_id" + " = " + rowId;
+            db.execSQL(query);
+        }
+    }
+
     public Cursor getIdeaDetails()
     {
         if(dbHelper!=null)
         {
             SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
-            return db.query(IDEA_TABLE,null,null,null,null,null,null);
+            Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,null);
+            int totalIdeasCount = cursor.getCount();
+            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            return cursor;
+        }
+
+        return null;
+    }
+
+    public Cursor getNewIdeas()
+    {
+        if(dbHelper!=null)
+        {
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"_id DESC");
+            int totalIdeasCount = cursor.getCount();
+            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            return cursor;
+        }
+
+        return null;
+    }
+
+    public Cursor getTopFiveIdeas()
+    {
+        if(dbHelper!=null)
+        {
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"ideaUpVote DESC","5");
+            int totalIdeasCount = cursor.getCount();
+            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            return cursor;
+        }
+
+        return null;
+    }
+
+    public Cursor getComments(int ideaId)
+    {
+        if(dbHelper!=null)
+        {
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            String whereNotNull = IDEA_ID_COMMENT + "= ?";
+            //String whereNull = LIST_NAME + " IS NULL";
+            String[] whereArgs = {String.valueOf(ideaId)};
+            Cursor cursor = db.query(COMMENT_TABLE,null,whereNotNull,whereArgs,null,null,"_id DESC");
+            //int totalIdeasCount = cursor.getCount();
+            //interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            return cursor;
         }
 
         return null;

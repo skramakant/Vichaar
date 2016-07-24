@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/app_background_color"
     tools:context="com.vichaar.vichaar.IdeaDetails">
-
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +112,7 @@
                 android:background="@drawable/rectangle">
                 <TextView
                     android:id="@+id/idea_details_upvote"
-                    android:layout_width="180dp"
+                    android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:textSize="25dp"
                     android:gravity="center"
@@ -112,13 +120,13 @@
                     android:padding="2dp"
                     android:textColor="@color/app_background_color"
                     />
-                <TextView
-                    android:layout_width="180dp"
-                    android:layout_height="30dp"
+                <Button
+                    android:id="@+id/bt_up_vote"
+                    android:layout_width="175dp"
+                    android:layout_height="50dp"
                     android:text="UpVote"
                     android:textSize="25dp"
                     android:gravity="center"
-                    android:padding="2dp"
                     android:textColor="@color/text_view_color"
                     />
             </LinearLayout>
@@ -131,7 +139,7 @@
                 android:background="@drawable/rectangle">
                 <TextView
                     android:id="@+id/idea_details_downvote"
-                    android:layout_width="190dp"
+                    android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:textSize="25dp"
                     android:gravity="center"
@@ -139,13 +147,13 @@
                     android:padding="2dp"
                     android:textColor="@color/app_background_color"
                     />
-                <TextView
-                    android:layout_width="190dp"
-                    android:layout_height="30dp"
-                    android:text="UpVote"
+                <Button
+                    android:id="@+id/bt_down_vote"
+                    android:layout_width="175dp"
+                    android:layout_height="50dp"
+                    android:text="DownVote"
                     android:textSize="25dp"
                     android:gravity="center"
-                    android:padding="2dp"
                     android:textColor="@color/text_view_color"
                     />
             </LinearLayout>
@@ -174,7 +182,7 @@
                 android:textColor="@color/text_view_color"
                 />
                 <EditText
-                    android:id="@+id/idea_details_comment"
+                    android:id="@+id/idea_add_comment"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textSize="20dp"
@@ -191,14 +199,27 @@
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="3dp"
-        android:layout_margin="5dp"
-        android:padding="5dp">
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:elevation="3dp"
+                android:layout_margin="5dp"
+                android:padding="5dp">
 
-    </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/comment_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

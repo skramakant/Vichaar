@@ -3,12 +3,9 @@ package com.vichaar.vichaar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,10 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.io.Serializable;
 
 import Adapters.TopIdeasAdapter;
 import Database.DatabaseOpenHelper;
@@ -29,7 +23,7 @@ import Interfaces.InterfaceRefreshDashboard;
 import Models.IdeaDetailsModel;
 
 public class DashboardDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, InterfaceOnItemClickHandler{
+        implements NavigationView.OnNavigationItemSelectedListener, InterfaceOnItemClickHandler,InterfaceRefreshDashboard{
 
     public static String TAG = DashboardDrawerActivity.class.getSimpleName();
     private RecyclerView topIdeasList;
@@ -69,7 +63,8 @@ public class DashboardDrawerActivity extends AppCompatActivity
 
     private void initView() {
         topIdeasList = (RecyclerView) findViewById(R.id.top_ideas_list);
-        participateCount = (TextView) findViewById(R.id.participant_count);
+        //participateCount = (TextView) findViewById(R.id.participant_count);
+
         ideasCount = (TextView) findViewById(R.id.ideas_count);
 
         topIdeasList.setNestedScrollingEnabled(false);
@@ -79,7 +74,7 @@ public class DashboardDrawerActivity extends AppCompatActivity
 
 
         //cursor code here
-        Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+        Cursor cursor = DatabaseOpenHelper.getInstance(this).getTopFiveIdeas();
         topIdeasAdapter = new TopIdeasAdapter(this,cursor);
         topIdeasList.setAdapter(topIdeasAdapter);
 
@@ -126,10 +121,19 @@ public class DashboardDrawerActivity extends AppCompatActivity
 
         if (id == R.id.all_ideas) {
             // Handle the camera action
+            Intent intent = new Intent(this,NewIdeas.class);
+            intent.putExtra("TAB_ALL_IDEAS","all_ideas");
+            startActivity(intent);
             Log.v(TAG,"All Ideas click");
         } else if (id == R.id.top_voted) {
+            Intent intent = new Intent(this,NewIdeas.class);
+            intent.putExtra("TAB_TOP_VOTED","top_voted");
+            startActivity(intent);
             Log.v(TAG,"Top Voted click");
         } else if (id == R.id.new_ideas) {
+            Intent intent = new Intent(this,NewIdeas.class);
+            intent.putExtra("TAB_NEW_IDEAS","new_ideas");
+            startActivity(intent);
             Log.v(TAG,"Newbies click");
         } else if (id == R.id.leader_board) {
             Log.v(TAG,"LeaderBoard click");
@@ -153,8 +157,8 @@ public class DashboardDrawerActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == ADD_IDEA_REQUEST_CODE){
-                Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
-                topIdeasAdapter.swapCursor(cursor);
+                //Cursor cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+                //topIdeasAdapter.swapCursor(cursor);
             }
         }
     }
@@ -162,7 +166,20 @@ public class DashboardDrawerActivity extends AppCompatActivity
     @Override
     public void itemClickHandler(IdeaDetailsModel ideaDetailsModel) {
         Intent intent = new Intent(this,IdeaDetails.class);
-        intent.putExtra("ideaDetails", (Serializable) ideaDetailsModel);
+        //Bundle bundle = new Bundle();
+        intent.putExtra("ideaDetails", ideaDetailsModel);
         startActivityForResult(intent,IDEA_DETAILS_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Cursor cursor = DatabaseOpenHelper.getInstance(this).getTopFiveIdeas();
+        topIdeasAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void refreshDashBoard(int totalIdeasCount) {
+        ideasCount.setText(Integer.toString(totalIdeasCount));
     }
 }

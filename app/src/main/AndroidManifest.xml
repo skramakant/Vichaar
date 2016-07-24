@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddIdea" />
-        <activity android:name=".IdeaDetails"></activity>
+        <activity android:name=".IdeaDetails" />
+        <activity android:name=".NewIdeas"></activity>
     </application>
 
 </manifest>
