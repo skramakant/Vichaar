@@ -1,8 +1,13 @@
 package com.vichaar.vichaar;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +36,8 @@ public class AddIdea extends AppCompatActivity implements View.OnClickListener {
 
     private long currentDate;
 
+    private String notificationContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,7 @@ public class AddIdea extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_idea:
+                notificationContent = idea_title_value.getText().toString() + " by " + idea_person_name_value.getText().toString();
                 currentDate = Calendar.getInstance().get(Calendar.MILLISECOND);
                 DatabaseOpenHelper.getInstance(this).insertIdea(idea_title_value.getText().toString(),idea_category_value.getText().toString(),
                         idea_description_value.getText().toString(),
@@ -65,8 +73,35 @@ public class AddIdea extends AppCompatActivity implements View.OnClickListener {
 
                 Intent returnIntent = new Intent();
                 setResult(Activity.RESULT_OK,returnIntent);
+                generateNotificationForNewIdea(notificationContent);
                 finish();
                 break;
         }
+    }
+
+    private void generateNotificationForNewIdea(String notificationContent) {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.splash_screen)
+                        .setContentTitle("New Idea")
+                        .setContentText(notificationContent);
+
+        Intent resultIntent = new Intent(this, NewIdeas.class);
+        resultIntent.putExtra("TAB","all_ideas");
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        mBuilder.setSound(alarmSound);
+        mBuilder.setContentIntent(resultPendingIntent);
+        // Sets an ID for the notification
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 }

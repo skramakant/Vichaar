@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
-        android:src="@mipmap/splash_screen"/>
+        android:src="@mipmap/app_icon_imege_new"/>
     <TextView
         android:id="@+id/splash_text"
         android:layout_width="match_parent"

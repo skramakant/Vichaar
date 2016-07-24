@@ -94,9 +94,9 @@
                 android:padding="5dp"
                 >
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
+
                     android:gravity="center"
                     android:text="Ideas"
                     android:textColor="@color/text_view_color"
@@ -104,11 +104,10 @@
                     />
                 <TextView
                     android:id="@+id/ideas_count"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
                     android:textColor="@color/text_view_color"
-                    android:text="500"
+                    android:text="0"
                     android:textSize="25dp"
                     android:gravity="center"/>
             </LinearLayout>

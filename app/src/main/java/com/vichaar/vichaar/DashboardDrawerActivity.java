@@ -23,7 +23,7 @@ import Interfaces.InterfaceRefreshDashboard;
 import Models.IdeaDetailsModel;
 
 public class DashboardDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, InterfaceOnItemClickHandler,InterfaceRefreshDashboard{
+        implements NavigationView.OnNavigationItemSelectedListener, InterfaceOnItemClickHandler{
 
     public static String TAG = DashboardDrawerActivity.class.getSimpleName();
     private RecyclerView topIdeasList;
@@ -77,8 +77,7 @@ public class DashboardDrawerActivity extends AppCompatActivity
         Cursor cursor = DatabaseOpenHelper.getInstance(this).getTopFiveIdeas();
         topIdeasAdapter = new TopIdeasAdapter(this,cursor);
         topIdeasList.setAdapter(topIdeasAdapter);
-
-
+        //updateIdeasCount();
     }
 
     @Override
@@ -176,10 +175,16 @@ public class DashboardDrawerActivity extends AppCompatActivity
         super.onResume();
         Cursor cursor = DatabaseOpenHelper.getInstance(this).getTopFiveIdeas();
         topIdeasAdapter.swapCursor(cursor);
+        updateIdeasCount();
     }
 
-    @Override
+    public void updateIdeasCount() {
+        int count = DatabaseOpenHelper.getInstance(this).getIdeasCount();
+        ideasCount.setText(Integer.toString(count));
+    }
+
+/*    @Override
     public void refreshDashBoard(int totalIdeasCount) {
         ideasCount.setText(Integer.toString(totalIdeasCount));
-    }
+    }*/
 }

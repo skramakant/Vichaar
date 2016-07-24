@@ -71,7 +71,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public DatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-        interfaceRefreshDashboard = (InterfaceRefreshDashboard) context;
+        //interfaceRefreshDashboard = (InterfaceRefreshDashboard) context;
     }
 
     public static DatabaseOpenHelper getInstance(Context context)
@@ -170,12 +170,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         {
             SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
             Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,null);
-            int totalIdeasCount = cursor.getCount();
-            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            //int totalIdeasCount = cursor.getCount();
+            //interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
             return cursor;
         }
 
         return null;
+    }
+
+    public int getIdeasCount(){
+        SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+        Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,null);
+        int totalIdeasCount = cursor.getCount();
+        return totalIdeasCount;
+        //interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
     }
 
     public Cursor getNewIdeas()
@@ -184,8 +192,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         {
             SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
             Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"_id DESC");
-            int totalIdeasCount = cursor.getCount();
-            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
             return cursor;
         }
 
@@ -198,8 +204,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         {
             SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
             Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"ideaUpVote DESC","5");
-            int totalIdeasCount = cursor.getCount();
-            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
             return cursor;
         }
 
@@ -212,8 +216,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         {
             SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
             Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"ideaUpVote DESC");
-            int totalIdeasCount = cursor.getCount();
-            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
             return cursor;
         }
 
