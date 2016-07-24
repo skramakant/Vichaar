@@ -23,10 +23,15 @@ public class NewIdeas extends AppCompatActivity implements InterfaceOnItemClickH
     private int ADD_IDEA_REQUEST_CODE = 100;
     private int IDEA_DETAILS_REQUEST_CODE = 101;
 
+    String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ideas);
+        if(getIntent().getExtras() != null){
+            key = (String) getIntent().getExtras().get("TAB");
+        }
         initView();
     }
 
@@ -43,9 +48,20 @@ public class NewIdeas extends AppCompatActivity implements InterfaceOnItemClickH
 
 
         //cursor code here
-        Cursor cursor = DatabaseOpenHelper.getInstance(this).getNewIdeas();
-        topIdeasAdapter = new TopIdeasAdapter(this,cursor);
-        topIdeasList.setAdapter(topIdeasAdapter);
+        Cursor cursor = null;
+        if(key.equals("all_ideas")){
+            cursor = DatabaseOpenHelper.getInstance(this).getIdeaDetails();
+        }else if(key.equals("top_voted")){
+            cursor = DatabaseOpenHelper.getInstance(this).getTopVotedIdeas();
+        }else if(key.equals("new_ideas")){
+            cursor = DatabaseOpenHelper.getInstance(this).getNewIdeas();
+        }
+        //Cursor cursor = DatabaseOpenHelper.getInstance(this).getNewIdeas();
+        if(cursor != null){
+            topIdeasAdapter = new TopIdeasAdapter(this,cursor);
+            topIdeasList.setAdapter(topIdeasAdapter);
+        }
+
 
 
     }
@@ -60,8 +76,14 @@ public class NewIdeas extends AppCompatActivity implements InterfaceOnItemClickH
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(key.equals("all_ideas")){
+            getSupportActionBar().setTitle("All Ideas");
+        }else if(key.equals("top_voted")){
+            getSupportActionBar().setTitle("Top Voted Ideas");
+        }else if(key.equals("new_ideas")){
+            getSupportActionBar().setTitle("New Ideas");
+        }
 
-        getSupportActionBar().setTitle("New Ideas");
         return super.onCreateOptionsMenu(menu);
     }
 }

@@ -122,17 +122,17 @@ public class DashboardDrawerActivity extends AppCompatActivity
         if (id == R.id.all_ideas) {
             // Handle the camera action
             Intent intent = new Intent(this,NewIdeas.class);
-            intent.putExtra("TAB_ALL_IDEAS","all_ideas");
+            intent.putExtra("TAB","all_ideas");
             startActivity(intent);
             Log.v(TAG,"All Ideas click");
         } else if (id == R.id.top_voted) {
             Intent intent = new Intent(this,NewIdeas.class);
-            intent.putExtra("TAB_TOP_VOTED","top_voted");
+            intent.putExtra("TAB","top_voted");
             startActivity(intent);
             Log.v(TAG,"Top Voted click");
         } else if (id == R.id.new_ideas) {
             Intent intent = new Intent(this,NewIdeas.class);
-            intent.putExtra("TAB_NEW_IDEAS","new_ideas");
+            intent.putExtra("TAB","new_ideas");
             startActivity(intent);
             Log.v(TAG,"Newbies click");
         } else if (id == R.id.leader_board) {

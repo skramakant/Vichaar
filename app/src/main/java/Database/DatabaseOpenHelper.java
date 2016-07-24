@@ -206,6 +206,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public Cursor getTopVotedIdeas()
+    {
+        if(dbHelper!=null)
+        {
+            SQLiteDatabase db = dbHelper.dbHelper.getWritableDatabase();
+            Cursor cursor = db.query(IDEA_TABLE,null,null,null,null,null,"ideaUpVote DESC");
+            int totalIdeasCount = cursor.getCount();
+            interfaceRefreshDashboard.refreshDashBoard(totalIdeasCount);
+            return cursor;
+        }
+
+        return null;
+    }
+
     public Cursor getComments(int ideaId)
     {
         if(dbHelper!=null)
